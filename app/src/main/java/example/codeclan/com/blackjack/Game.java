@@ -22,63 +22,30 @@ public class Game {
 
     }
 
-    public int Playerlogic(){
+    public int playerWon(){
         if (player.getHandValue() == 21) {
             return 1;
         }
-        while (player.getHandValue() < 21 && (inProgress)) {
-
-            if (player.getHandValue() == 21) {
-                System.out.println("Your total is: " + player.getHandValue());
-                return 1;
-            }
+        if (player.getHandValue() < 21){
+            return 0;
         }
-        System.out.println("Your total is: " + player.getHandValue());
         if (player.getHandValue() > 21){
             return -1;
         }
-        return 2;
+        return 0;
     }
 
-    public int DealerLogic(){
-        if (dealer.getHandValue() == 21) {
+    public int dealerWon(){
+        if (player.getHandValue() == 21) {
             return -1;
         }
-        while (dealer.getHandValue() <= 21) {
-            if (dealer.getHandValue() < 17) {
-                System.out.println("Dealer Hits!");
-                dealer.addOnetoHand(deck);
-                System.out.println(dealer.showOneCard());
-                System.out.println("Dealer total is: " + dealer.getHandValue());
-            }
-            if (dealer.getHandValue() == 21) {
-                System.out.println("Dealer total is: " + dealer.getHandValue());
-                return -1;
-            }
-            if (dealer.getHandValue() > 21) {
-                System.out.println("Dealer Bust!");
-                return 1;
-            }
-            if(dealer.getHandValue() >=17 && dealer.getHandValue() <=21){
-                if (dealer.getHandValue() >= player.getHandValue()){
-                    return -1;
-                }
-                else
-                    return 1;
-            }
+        if (player.getHandValue() < 21){
+            return 0;
         }
-        return -1;
-    }
-
-    public void getPlayerChoice(Choice playerChoice){
-        switch (playerChoice){
-            case HIT:
-                player.addOnetoHand(deck);
-                break;
-            case STAND:
-                inProgress = false;
-                break;
+        if (player.getHandValue() > 21){
+            return 1;
         }
+        return 0;
     }
 
     public String displayWinner(int result){

@@ -28,16 +28,12 @@ public class HandAdaptor extends ArrayAdapter<Card> {
         if(listItemView == null){
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.card_item, parent, false);
         }
-
         Card currentCard = getItem(position);
         TextView card_number = (TextView) listItemView.findViewById(R.id.card_number);
         card_number.setText(currentCard.getCardnoDisplay());
         ImageView image = (ImageView) listItemView.findViewById(R.id.cardsuit);
         int suitDrawable = currentCard.getImage();
         image.setImageResource(suitDrawable);
-
-//        String url = currentCard.getUrl();
-//        Picasso.with(getContext()).load(url).into(image);
 
         listItemView.setTag(currentCard);
 
