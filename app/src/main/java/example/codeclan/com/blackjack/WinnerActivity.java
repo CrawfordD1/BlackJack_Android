@@ -6,19 +6,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class WinnerActivity extends Activity {
 
     private ImageView winnerImage;
     private Button playAgainButton;
+    private TextView winAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winner);
+       getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        WalletTracker tracker = new WalletTracker(this);
+
 
         winnerImage = (ImageView) findViewById(R.id.winnerView);
         playAgainButton = (Button) findViewById(R.id.playAgain_button);
+        winAmount = (TextView) findViewById(R.id.winAmount);
+
+        winAmount.setText(Integer.toString(Integer.parseInt(tracker.getCurrentBet()) * 2));
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -27,9 +36,10 @@ public class WinnerActivity extends Activity {
 
         if(winner.equals("Player Wins!")){
             wallet.playerWin();
-            winnerImage.setImageResource(R.drawable.diamonds);
+            winnerImage.setImageResource(R.drawable.playerwin);
         }else if(winner.equals("Dealer Wins!")) {
-            winnerImage.setImageResource(R.drawable.card_back);
+            winAmount.setVisibility(View.GONE);
+            winnerImage.setImageResource(R.drawable.dealerwin);
         }
     }
 
