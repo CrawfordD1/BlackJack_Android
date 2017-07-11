@@ -16,21 +16,18 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private Deck deck;
     private Player player;
     private Dealer dealer;
-    private ArrayList<Card> playerList;
-    private ArrayList<Card> dealerList;
     private HandAdaptor playerHandAdaptor;
     private HandAdaptor dealerHandAdaptor;
     private ListView playerListView;
     private ListView dealerListView;
     private TextView handValue;
     private TextView dealerValue;
-    private TextView betView;
     private Game game;
     private ImageView cardback;
     private Button hitButton;
     private Button standButton;
-    private WalletTracker walletTracker;
     private CountDownTimer dealerTimer;
+    private WalletTracker walletTracker;
 
 
 
@@ -46,7 +43,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         cardback = (ImageView) findViewById(R.id.card_back);
         standButton = (Button) findViewById(R.id.stand_button);
         hitButton = (Button) findViewById(R.id.hit_button);
-        betView = (TextView)findViewById(R.id.betView);
+        TextView betView = (TextView) findViewById(R.id.betView);
 
         deck = new Deck();
         player = new Player();
@@ -60,8 +57,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         player.startHand(deck);
         dealer.startHand(deck);
 
-        playerList = player.getCardList();
-        dealerList = dealer.getCardList();
+        ArrayList<Card> playerList = player.getCardList();
+        ArrayList<Card> dealerList = dealer.getCardList();
 
         playerHandAdaptor = new HandAdaptor(this, playerList);
         dealerHandAdaptor = new HandAdaptor(this, dealerList);
@@ -80,17 +77,22 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     public void onHitClick(View button){
+        // Player presses Hit button
         player.addOnetoHand(deck);
-        playerHandAdaptor.notifyDataSetChanged();
-        playerListView.setSelection(playerHandAdaptor.getPosition(player.getLastCard()));
+        playerHandAdaptor.notifyDataSetChanged(); //updates the listview after adding card
+        playerListView.setSelection(playerHandAdaptor.getPosition(player.getLastCard())); // moves list view to select latest added card.
         handValue.setText("Current Hand Value: " + player.getHandValue());
+        //playerTurn performs checks to see if they have won
         playerTurn();
     }
 
     public void onStandClick(View button){
+        //after stand sets all buttons to be inactive.
+        //removes card back covering the dealers second card
         cardback.setVisibility(View.INVISIBLE);
         hitButton.setEnabled(false);
         standButton.setEnabled(false);
+        //loops dealer turn while less than 17, checks winner when above 17.
         while(dealer.getHandValue() < 17) {
             dealerTurn();
         }if(dealer.getHandValue() >=17 && dealer.getHandValue() < 21){
@@ -103,6 +105,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     public void compareValues(){
+        // compares hand values at the end of game to find definite winner, forces dealer win on draw.
         if(player.getHandValue() > dealer.getHandValue()){
             gameWon(game.displayWinner(1));
         }else{
@@ -120,6 +123,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 if (game.dealerWon() == 0) {
 
                     dealer.addOnetoHand(deck);
+                    //timer to reduce speed of game, allow the user to see whats happening.
                     CountDownTimer gameTimer = new CountDownTimer(1000, 1000) {
 
                         @Override
@@ -129,12 +133,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
                         @Override
                         public void onFinish() {
+                            //do something when timer finished.
                             dealerValue.setText("Dealer Hand Value: " + dealer.getHandValue());
                             dealerHandAdaptor.notifyDataSetChanged();
                         }
 
                     }.start();
-
+                    //delays everything for a second.
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -177,6 +182,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
             }if(game.playerWon() == -1){
                 gameWon(game.displayWinner(-1));
             }
+    }
+
+    public void onBackPressed(){
+        walletTracker.undoBet();
+        Intent intent = new Intent(this, LaunchActivity.class);
+        startActivity(intent);
     }
 }
 

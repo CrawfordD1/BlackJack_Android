@@ -19,6 +19,7 @@ public class WinnerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winner);
        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        setFinishOnTouchOutside(false);
 
         WalletTracker tracker = new WalletTracker(this);
 

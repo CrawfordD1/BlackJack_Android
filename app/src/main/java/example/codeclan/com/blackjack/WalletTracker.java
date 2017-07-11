@@ -47,6 +47,14 @@ public class WalletTracker {
         return sharedPreferences.getString("bet", DEFAULT);
     }
 
+    public void undoBet() {
+        String wallet = getPlayerWallet();
+        int bet = Integer.parseInt(getCurrentBet());
+        int result = Integer.parseInt(wallet) + (bet);
+        editor.putString("wallet", Integer.toString(result));
+        editor.apply();
+    }
+
     public void playerWin() {
         String wallet = getPlayerWallet();
         int bet = Integer.parseInt(getCurrentBet());
