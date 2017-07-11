@@ -47,10 +47,11 @@ public class WalletTracker {
         return sharedPreferences.getString("bet", DEFAULT);
     }
 
-    public void undoBet() {
+
+
+    public void addToWallet(String input) {
         String wallet = getPlayerWallet();
-        int bet = Integer.parseInt(getCurrentBet());
-        int result = Integer.parseInt(wallet) + (bet);
+        int result = Integer.parseInt(wallet) + Integer.parseInt(input);
         editor.putString("wallet", Integer.toString(result));
         editor.apply();
     }

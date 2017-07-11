@@ -48,4 +48,7 @@ public class WinnerActivity extends Activity {
         Intent intent = new Intent(this, LaunchActivity.class);
         startActivity(intent);
     }
+
+    public void onBackPressed(){
+    }
 }

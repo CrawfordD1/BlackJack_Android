@@ -28,6 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private Button standButton;
     private CountDownTimer dealerTimer;
     private WalletTracker walletTracker;
+    private boolean playerlost;
 
 
 
@@ -51,7 +52,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
         game = new Game(dealer, player);
         walletTracker = new WalletTracker(this);
 
-        betView.setText("Bet: " + walletTracker.getCurrentBet());
+        if(walletTracker.getCurrentBet().equals("0")){
+            betView.setText("Practice Mode");
+        }else {
+            betView.setText("Bet: " + walletTracker.getCurrentBet());
+        }
 
 
         player.startHand(deck);
@@ -154,6 +159,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private void gameWon(final String winner) {
         hitButton.setEnabled(false);
         standButton.setEnabled(false);
+
         final Intent intent = new Intent(getBaseContext(), WinnerActivity.class);
         intent.putExtra("winner", winner);
         dealerValue.setText("Dealer Hand Value: " + dealer.getHandValue());
@@ -185,9 +191,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     public void onBackPressed(){
-        walletTracker.undoBet();
-        Intent intent = new Intent(this, LaunchActivity.class);
-        startActivity(intent);
+
     }
 }
 

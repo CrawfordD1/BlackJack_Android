@@ -27,25 +27,31 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Dialog">
         </activity>
-        <activity android:name=".BlackJackStartActivity"
-                  android:screenOrientation="portrait">
-
+        <activity
+            android:name=".BlackJackStartActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".PokerStartActivity"
-                  android:screenOrientation="portrait">
-
+        <activity
+            android:name=".PokerStartActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".AddFundsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Dialog">
         </activity>
         <activity
             android:name=".CardGameLauncher"
             android:label="@string/title_activity_card_game_launcher"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

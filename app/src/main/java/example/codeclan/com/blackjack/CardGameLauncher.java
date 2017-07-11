@@ -46,33 +46,11 @@ public class CardGameLauncher extends Activity {
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setOffscreenPageLimit(1);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
 
     }
 
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_card_game_launcher, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -110,6 +88,7 @@ public class CardGameLauncher extends Activity {
             }else if(currentView == 2) {
                 rootView = inflater.inflate(R.layout.activity_poker_start, container, false);
             }
+
             return rootView;
         }
     }
@@ -143,16 +122,6 @@ public class CardGameLauncher extends Activity {
             return 2;
         }
 
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-////            switch (position) {
-////                case 0:
-////                    return "SECTION 1";
-////                case 1:
-////                    return "SECTION 2";
-////                case 2:
-////                    return "SECTION 3";
-//            }
 
         }
     }

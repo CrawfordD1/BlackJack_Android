@@ -58,9 +58,13 @@ public class LaunchActivity extends Activity {
     }
 
     public void onAddFundsClick(View button){
-        walletTracker.setWallet();
-        betBar.setMax(Integer.parseInt(walletTracker.getPlayerWallet()));
-        walletView.setText("Wallet: " + walletTracker.getPlayerWallet());
+//        walletTracker.setWallet();
+
+        Intent intent = new Intent(this, AddFundsActivity.class);
+        startActivity(intent);
+//
+//        betBar.setMax(Integer.parseInt(walletTracker.getPlayerWallet()));
+//        walletView.setText("Wallet: " + walletTracker.getPlayerWallet());
 
 
     }
