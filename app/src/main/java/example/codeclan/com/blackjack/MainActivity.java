@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends Activity{
 
     private Deck deck;
     private Player player;
@@ -26,9 +27,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private ImageView cardback;
     private Button hitButton;
     private Button standButton;
-    private CountDownTimer dealerTimer;
     private WalletTracker walletTracker;
-    private boolean playerlost;
 
 
 
@@ -46,6 +45,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         hitButton = (Button) findViewById(R.id.hit_button);
         TextView betView = (TextView) findViewById(R.id.betView);
 
+
         deck = new Deck();
         player = new Player();
         dealer = new Dealer();
@@ -57,7 +57,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }else {
             betView.setText("Bet: " + walletTracker.getCurrentBet());
         }
-
 
         player.startHand(deck);
         dealer.startHand(deck);
@@ -74,11 +73,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         dealerValue.setText("Dealer Hand Value: " + (dealer.getHandValue() - dealer.getLastCard().getCardno()));
 
         playerTurn();
-
-    }
-
-    @Override
-    public void onClick(View v) {
     }
 
     public void onHitClick(View button){
@@ -157,6 +151,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
 
     private void gameWon(final String winner) {
+        //find winner and pass through intent to win screen
         hitButton.setEnabled(false);
         standButton.setEnabled(false);
 
@@ -183,6 +178,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     public void playerTurn(){
+        //check if layer won to pass through to win screen
             if (game.playerWon() == 1) {
                 gameWon(game.displayWinner(1));
             }if(game.playerWon() == -1){
@@ -191,7 +187,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
     public void onBackPressed(){
-
+        //left blank intentionally to prevent user pressing back and cheating the game
     }
 }
 

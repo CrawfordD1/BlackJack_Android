@@ -22,11 +22,6 @@ public class WalletTracker {
         this.editor = sharedPreferences.edit();
     }
 
-    public void setwinner(String result){
-        if(result.equals("Player Wins!")){
-            playerWin();
-        }
-    }
 
     public void resetTracker(){
         editor.putString("wallet", Integer.toString(0));
@@ -34,10 +29,6 @@ public class WalletTracker {
         editor.apply();
     }
 
-    public void setWallet(){
-        editor.putString("wallet", "500");
-        editor.apply();
-    }
 
     public String getPlayerWallet() {
         return sharedPreferences.getString("wallet", DEFAULT);
