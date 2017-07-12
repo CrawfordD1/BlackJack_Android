@@ -63,15 +63,15 @@
         android:id="@+id/cc_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:maxLength="16"
-        android:hint="CC Number"
-        android:inputType="number"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Security no."
+        android:inputType="number"
+        android:maxLength="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amount_input"/>
 
     <Button

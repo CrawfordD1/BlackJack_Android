@@ -32,7 +32,7 @@ public class AddFundsActivity extends Activity {
         boolean passGood = false;
 
 
-        if ((!amountInput.getText().toString().trim().equals("")) && (!passInput.getText().toString().trim().equals("")) && (ccInput.length() == 16)){
+        if ((!amountInput.getText().toString().trim().equals("")) && (!passInput.getText().toString().trim().equals("")) && (ccInput.length() == 3)){
             amountGood = true;
             ccGood = true;
             passGood = true;
